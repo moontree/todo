@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="angular.js"></script>
+	<script src="av-mini.js"></script>
+	<script src="todo.js"></script>
+	<style>
+	.div-a{ float:left;width:49%} 
+	.div-b{ float:left;width:49%} 
+	</style>
+</head>
+<body ng-app="todoMod">
+	<div ng-controller = "TodoController">
+		<div>
+			<h3>Add Todo</h3>
+			<form ng-submit="addTodo()">
+				<div>
+					<input type="text" ng-model="newTodo.text">
+					<input type="submit" value="add">
+				</div>
+			</form>
+		</div>
+		<div class = "div-a">
+			<h3>Todo List</h3>
+			<ul class="unstyled">
+				<li ng-repeat="todo in todos | filter:{done: false}">
+					<div class="controls form-inline">
+						<input id="todo{{$index}}" type="checkbox" ng-change="updateTodoState(todo)" ng-model="todo.done"/>
+						<label for="todo{{$index}}">{{todo.text}}</label>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class = "div-b">
+			<h3>Done List</h3>
+			<ul class="unstyled">
+				<li ng-repeat="todo in todos | filter:{done: true}">
+					<div class="controls form-inline">
+						<input id="done{{$index}}" type="checkbox" ng-change="updateTodoState(todo)" ng-model="todo.done"/>
+						<label for="done{{$index}}">{{todo.text}}</label>
+					</div>
+				</li>
+			</ul>
+		</div>		
+	</div>
+</body>
+</html>
